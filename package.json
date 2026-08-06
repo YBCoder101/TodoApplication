@@ -1,0 +1,19 @@
+{
+  "name": "labtrack",
+  "version": "1.0.0",
+  "description": "Local-first task tracker for CS lab work. Single-user, runs entirely on your machine.",
+  "main": "server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "express": "^4.19.2"
+  }
+}

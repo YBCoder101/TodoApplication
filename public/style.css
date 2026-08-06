@@ -1,0 +1,340 @@
+/* ---------------------------------------------------------------------
+   Tokens
+   Palette: paper #EEF1E8, ink #21301F, rule #B9C4AE, action #2B6B72,
+            stamp/overdue #A13B2C, gold (in-progress) #B8860B
+   Type: display/utility = monospace system stack (lab-notebook, code feel)
+         body = humanist sans system stack (readable dense lists)
+------------------------------------------------------------------------ */
+:root {
+  --paper: #eef1e8;
+  --paper-raised: #f7f8f2;
+  --ink: #21301f;
+  --ink-soft: #55624f;
+  --rule: #c3cdb6;
+  --action: #2b6b72;
+  --action-dark: #1e4d52;
+  --stamp: #a13b2c;
+  --stamp-bg: #fbe9e4;
+  --gold: #9c7a15;
+  --gold-bg: #f3ecd4;
+  --complete: #3e6b3a;
+  --complete-bg: #e5eede;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --sans: -apple-system, "Segoe UI", "Inter", Roboto, Helvetica, Arial, sans-serif;
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+}
+
+.margin-rule {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 56px;
+  width: 1px;
+  background: var(--rule);
+  z-index: 0;
+}
+
+@media (max-width: 640px) {
+  .margin-rule { display: none; }
+}
+
+header.page-header,
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px 0 76px;
+}
+
+@media (max-width: 640px) {
+  header.page-header, main { padding: 0 20px; }
+}
+
+.page-header {
+  padding-top: 48px;
+  padding-bottom: 24px;
+}
+
+.comment-tag {
+  font-family: var(--mono);
+  color: var(--action);
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+  letter-spacing: 0.02em;
+}
+
+.page-header h1 {
+  font-family: var(--mono);
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 52ch;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 24px;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.toolbar-group label {
+  color: var(--ink-soft);
+}
+
+.toolbar-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+select,
+input[type="text"],
+input[type="date"],
+textarea {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 7px 10px;
+}
+
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 1px;
+}
+
+.btn {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.toolbar .btn { margin-left: auto; }
+
+.btn-primary {
+  background: var(--action);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--action-dark); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--rule);
+}
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink-soft); }
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--action);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.btn-text:hover { text-decoration: underline; }
+
+.form-panel {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-bottom: 28px;
+}
+
+.form-panel h2 {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  margin: 0 0 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.field label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+}
+
+.field-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.field-row .field { min-width: 160px; }
+
+textarea { resize: vertical; }
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+
+.task-table thead th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  padding: 0 12px 10px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.task-row td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.task-row.is-archived { opacity: 0.55; }
+
+.task-row.is-overdue { border-left: 3px solid var(--stamp); }
+.task-row.is-overdue td:first-child { padding-left: 9px; }
+
+.task-title {
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.task-desc {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  max-width: 42ch;
+}
+
+.status-select {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  padding: 5px 8px;
+  background: var(--paper-raised);
+}
+
+.status-select[data-status="todo"] { color: var(--ink-soft); }
+.status-select[data-status="in-progress"] { color: var(--gold); background: var(--gold-bg); border-color: var(--gold); }
+.status-select[data-status="complete"] { color: var(--complete); background: var(--complete-bg); border-color: var(--complete); }
+
+.topic-tag {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--action-dark);
+  background: #e3edea;
+  padding: 3px 8px;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.due-cell {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* The signature element: a rubber-stamp mark for overdue tasks,
+   evoking a grader's red pen rather than a generic status badge. */
+.overdue-stamp {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--stamp);
+  border: 1.5px solid var(--stamp);
+  border-radius: 2px;
+  padding: 1px 5px;
+  transform: rotate(-4deg);
+  background: var(--stamp-bg);
+}
+
+.row-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.empty-state {
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  padding: 24px 12px;
+  text-align: center;
+  border: 1px dashed var(--rule);
+  border-radius: var(--radius);
+}
+
+@media (max-width: 640px) {
+  .task-table thead { display: none; }
+  .task-table, .task-table tbody, .task-row, .task-row td {
+    display: block;
+    width: 100%;
+  }
+  .task-row { border-bottom: 1px solid var(--rule); padding: 10px 0; }
+  .task-row td { border-bottom: none; padding: 4px 0; }
+  .row-actions { justify-content: flex-start; margin-top: 6px; }
+}

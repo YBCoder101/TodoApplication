@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LabTrack</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="margin-rule" aria-hidden="true"></div>
+
+  <header class="page-header">
+    <p class="comment-tag">// labtrack</p>
+    <h1>Lab task ledger</h1>
+    <p class="subtitle">Local, single-user tracker for your CS lab work. Nothing leaves this machine.</p>
+  </header>
+
+  <main>
+    <section class="toolbar" aria-label="List controls">
+      <div class="toolbar-group">
+        <label for="sort-select">Sort by</label>
+        <select id="sort-select">
+          <option value="dueDate">Due date</option>
+          <option value="status">Status</option>
+          <option value="topic">Topic</option>
+        </select>
+      </div>
+
+      <label class="toolbar-checkbox">
+        <input type="checkbox" id="show-archived" />
+        Show archived
+      </label>
+
+      <button id="new-task-btn" class="btn btn-primary" type="button">+ New task</button>
+    </section>
+
+    <section id="task-form-panel" class="form-panel" hidden>
+      <h2 id="form-title">New task</h2>
+      <form id="task-form">
+        <input type="hidden" id="task-id" />
+
+        <div class="field">
+          <label for="field-title">Title</label>
+          <input type="text" id="field-title" required maxlength="120" placeholder="Implement B-tree insert" />
+        </div>
+
+        <div class="field">
+          <label for="field-description">Description</label>
+          <textarea id="field-description" rows="3" placeholder="Notes, acceptance criteria, gotchas..."></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="field-due-date">Due date</label>
+            <input type="date" id="field-due-date" required />
+          </div>
+
+          <div class="field">
+            <label for="field-topic">Topic</label>
+            <input type="text" id="field-topic" list="topic-options" required maxlength="60" placeholder="Data Structures" />
+            <datalist id="topic-options"></datalist>
+          </div>
+
+          <div class="field" id="status-field" hidden>
+            <label for="field-status">Status</label>
+            <select id="field-status">
+              <option value="todo">Todo</option>
+              <option value="in-progress">In-Progress</option>
+              <option value="complete">Complete</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="form-submit-btn">Save task</button>
+          <button type="button" class="btn btn-ghost" id="form-cancel-btn">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <section aria-label="Tasks">
+      <table class="task-table">
+        <thead>
+          <tr>
+            <th scope="col">Status</th>
+            <th scope="col">Task</th>
+            <th scope="col">Topic</th>
+            <th scope="col">Due</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="task-list">
+          <!-- rows injected by app.js -->
+        </tbody>
+      </table>
+      <p id="empty-state" class="empty-state" hidden>No tasks yet. Log your first one above.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
